@@ -9,7 +9,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var bitcoinValueLabel: UILabel!
     @IBOutlet weak var currencyPickerView: UIPickerView!
@@ -23,8 +23,6 @@ class MainViewController: UIViewController {
         
         super.viewDidLoad()
     }
-
-
 }
 
 //MARK: - UIPickerViewDelegate
@@ -50,8 +48,6 @@ extension MainViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return bitCoinManager.currencyArray.count
     }
-    
-    
 }
 //MARK: - BitCoinManagerDelegate
 
@@ -63,11 +59,11 @@ extension MainViewController: BitCoinManagerDelegate {
         }
     }
     
-    func didFailWithError(_ error: Error) {
-        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
-        present(alert, animated: true)
+    func didFailWithError(_ errorString: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error", message: errorString, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        }
     }
-    
-    
 }

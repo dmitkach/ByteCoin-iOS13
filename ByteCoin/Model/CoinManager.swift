@@ -10,7 +10,7 @@ import Foundation
 
 protocol BitCoinManagerDelegate {
     func didUpdateCurrency(rateModel: RateModel)
-    func didFailWithError(_ error: Error)
+    func didFailWithError(_ errorString: String)
 }
 
 struct CoinManager {
@@ -35,7 +35,7 @@ struct CoinManager {
             
             let task = session.dataTask(with: url) { (data, response, error) in
                 if let safeError = error {
-                    self.delegate?.didFailWithError(safeError)
+                    self.delegate?.didFailWithError(safeError.localizedDescription)
                     return
                 }
                 if let safeData = data {
@@ -53,12 +53,16 @@ struct CoinManager {
         
         do {
             let decodedData = try decoder.decode(RateData.self, from: rateData)
-            let sourceCurrency = decodedData.assetIdQuote
-            let targetCurrency = decodedData.assetIdBase
-            let currencyRate = decodedData.rate
+            if let error = decodedData.error {
+                delegate?.didFailWithError(error)
+                return nil
+            }
+            let sourceCurrency = decodedData.assetIdQuote!
+            let targetCurrency = decodedData.assetIdBase!
+            let currencyRate = decodedData.rate!
             return RateModel(fromCurrency: sourceCurrency, toCurrency: targetCurrency, rate: currencyRate)
         } catch {
-            delegate?.didFailWithError(error)
+            delegate?.didFailWithError(error.localizedDescription)
             return nil
         }
     }
