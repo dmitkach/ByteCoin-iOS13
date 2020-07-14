@@ -18,9 +18,14 @@ struct CoinManager {
     private let bitCoinURL = "https://rest.coinapi.io/v1/exchangerate/"
     private let apiKey = "A134C4A4-D8A5-43C9-875C-33F9F8A78460"
     let currencyArray =
-        ["AUD","BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS",
-         "INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK",
-         "SGD","USD","ZAR"]
+        [
+            ["AUD","BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS",
+             "INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK",
+             "SGD","USD","ZAR"],
+            ["AUD","BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS",
+             "INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK",
+             "SGD","USD","ZAR"]
+    ]
     var delegate: BitCoinManagerDelegate?
     
     func fetchCoinRate(from fromCurrency: String) {

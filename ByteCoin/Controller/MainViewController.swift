@@ -29,11 +29,11 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return bitCoinManager.currencyArray[row]
+        return bitCoinManager.currencyArray[component][row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let selectedCurrency = bitCoinManager.currencyArray[row]
+        let selectedCurrency = bitCoinManager.currencyArray[component][row]
         bitCoinManager.fetchCoinRate(from: selectedCurrency)
     }
 }
@@ -42,11 +42,11 @@ extension MainViewController: UIPickerViewDelegate {
 
 extension MainViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        return 2
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return bitCoinManager.currencyArray.count
+        return bitCoinManager.currencyArray[0].count
     }
 }
 //MARK: - BitCoinManagerDelegate
