@@ -37,7 +37,6 @@ extension MainViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let selectedCurrency = bitCoinManager.currencyArray[component][row]
-        print("Component: \(component); Row: \(row)")
         bitCoinManager.fetchCoinRate(from: selectedCurrency)
     }
 }
