@@ -17,11 +17,14 @@ class MainViewController: UIViewController {
     var bitCoinManager = CoinManager()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         currencyPickerView.delegate = self
         currencyPickerView.dataSource = self
         bitCoinManager.delegate = self
         
-        super.viewDidLoad()
+        currencyPickerView.selectRow(0, inComponent: 0, animated: true)
+        pickerView(currencyPickerView, didSelectRow: 0, inComponent: 0)
     }
 }
 
@@ -34,6 +37,7 @@ extension MainViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let selectedCurrency = bitCoinManager.currencyArray[component][row]
+        print("Component: \(component); Row: \(row)")
         bitCoinManager.fetchCoinRate(from: selectedCurrency)
     }
 }
