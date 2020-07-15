@@ -45,11 +45,11 @@ extension MainViewController: UIPickerViewDelegate {
 
 extension MainViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
+        return bitCoinManager.currencyArray.count
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return bitCoinManager.currencyArray[0].count
+        return bitCoinManager.currencyArray[component].count
     }
 }
 //MARK: - BitCoinManagerDelegate
