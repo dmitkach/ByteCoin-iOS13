@@ -10,18 +10,20 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    @IBOutlet weak var currencyLabel: UILabel!
-    @IBOutlet weak var bitcoinValueLabel: UILabel!
+    @IBOutlet weak var sourceCurrencyLabel: UILabel!
+    @IBOutlet weak var targetCurrencyLabel: UILabel!
+    @IBOutlet weak var sourceValueLabel: UILabel!
+    @IBOutlet weak var targetValueLabel: UILabel!
     @IBOutlet weak var currencyPickerView: UIPickerView!
     
-    var bitCoinManager = CoinManager()
+    var coinManager = CoinManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         currencyPickerView.delegate = self
         currencyPickerView.dataSource = self
-        bitCoinManager.delegate = self
+        coinManager.delegate = self
         
         currencyPickerView.selectRow(0, inComponent: 0, animated: true)
         pickerView(currencyPickerView, didSelectRow: 0, inComponent: 0)
@@ -32,12 +34,14 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return bitCoinManager.currencyArray[component][row]
+        return coinManager.currencyArray[component][row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let selectedCurrency = bitCoinManager.currencyArray[component][row]
-        bitCoinManager.fetchCoinRate(from: selectedCurrency)
+        let sourceCurrency = coinManager.currencyArray[0][pickerView.selectedRow(inComponent: 0)]
+        let targetCurrency = coinManager.currencyArray[1][pickerView.selectedRow(inComponent: 1)]
+        
+        coinManager.fetchCoinRate(from: sourceCurrency, to: targetCurrency)
     }
 }
 
@@ -45,20 +49,21 @@ extension MainViewController: UIPickerViewDelegate {
 
 extension MainViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return bitCoinManager.currencyArray.count
+        return coinManager.currencyArray.count
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return bitCoinManager.currencyArray[component].count
+        return coinManager.currencyArray[component].count
     }
 }
 //MARK: - BitCoinManagerDelegate
 
-extension MainViewController: BitCoinManagerDelegate {
+extension MainViewController: CoinManagerDelegate {
     func didUpdateCurrency(rateModel: RateModel) {
         DispatchQueue.main.async {
-            self.bitcoinValueLabel.text = rateModel.getRateString()
-            self.currencyLabel.text = rateModel.getSourceCurrencyString()
+            self.sourceCurrencyLabel.text = rateModel.getSourceCurrencyString()
+            self.targetValueLabel.text = rateModel.getRateString()
+            self.targetCurrencyLabel.text = rateModel.getTargetCurrencyString()
         }
     }
     

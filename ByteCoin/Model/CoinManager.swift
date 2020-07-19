@@ -8,14 +8,14 @@
 
 import Foundation
 
-protocol BitCoinManagerDelegate {
+protocol CoinManagerDelegate {
     func didUpdateCurrency(rateModel: RateModel)
     func didFailWithError(_ errorString: String)
 }
 
 struct CoinManager {
     
-    private let bitCoinURL = "https://rest.coinapi.io/v1/exchangerate/"
+    private let coinURL = "https://rest.coinapi.io/v1/exchangerate/"
     private let apiKey = "A134C4A4-D8A5-43C9-875C-33F9F8A78460"
     let currencyArray =
         [
@@ -26,12 +26,17 @@ struct CoinManager {
              "INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK",
              "SGD","USD","ZAR"]
     ]
-    var delegate: BitCoinManagerDelegate?
+    var delegate: CoinManagerDelegate?
     
-    func fetchCoinRate(from fromCurrency: String) {
-        let urlString = "\(bitCoinURL)BTC/\(fromCurrency)?apikey=\(apiKey)"
+    func fetchCoinRate(from fromCurrency: String, to toCurrency: String) {
+        let urlString = "\(coinURL)\(fromCurrency)/\(toCurrency)?apikey=\(apiKey)"
         
-        performRequest(with: urlString)
+        if fromCurrency == toCurrency {
+            self.delegate?.didUpdateCurrency(rateModel:
+                RateModel(fromCurrency: fromCurrency, toCurrency: toCurrency, rate: 1.0))
+        } else {
+            performRequest(with: urlString)
+        }
     }
     
     func performRequest(with urlString: String) {
@@ -39,8 +44,8 @@ struct CoinManager {
             let session = URLSession(configuration: .default)
             
             let task = session.dataTask(with: url) { (data, response, error) in
-                if let safeError = error {
-                    self.delegate?.didFailWithError(safeError.localizedDescription)
+                if let error = error {
+                    self.delegate?.didFailWithError(error.localizedDescription)
                     return
                 }
                 if let safeData = data {
@@ -62,8 +67,8 @@ struct CoinManager {
                 delegate?.didFailWithError(error)
                 return nil
             }
-            let sourceCurrency = decodedData.assetIdQuote!
-            let targetCurrency = decodedData.assetIdBase!
+            let targetCurrency = decodedData.assetIdQuote!
+            let sourceCurrency = decodedData.assetIdBase!
             let currencyRate = decodedData.rate!
             return RateModel(fromCurrency: sourceCurrency, toCurrency: targetCurrency, rate: currencyRate)
         } catch {
