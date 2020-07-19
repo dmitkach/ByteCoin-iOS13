@@ -14,6 +14,7 @@
 		8F022EAD24A8D2FF007FC1F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F022EAC24A8D2FF007FC1F9 /* Assets.xcassets */; };
 		8F022EB024A8D2FF007FC1F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F022EAE24A8D2FF007FC1F9 /* LaunchScreen.storyboard */; };
 		8F022EBB24A8D646007FC1F9 /* CoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F022EBA24A8D646007FC1F9 /* CoinManager.swift */; };
+		8F02FEE324C46EE300964831 /* OldMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F02FEE124C46EE300964831 /* OldMain.storyboard */; };
 		8F94AC0B24BDE856005F38A5 /* RateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F94AC0A24BDE856005F38A5 /* RateData.swift */; };
 		8F94AC0D24BDE878005F38A5 /* RateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F94AC0C24BDE878005F38A5 /* RateModel.swift */; };
 /* End PBXBuildFile section */
@@ -28,6 +29,7 @@
 		8F022EAF24A8D2FF007FC1F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F022EB124A8D2FF007FC1F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F022EBA24A8D646007FC1F9 /* CoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinManager.swift; sourceTree = "<group>"; };
+		8F02FEE224C46EE300964831 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OldMain.storyboard; sourceTree = "<group>"; };
 		8F94AC0A24BDE856005F38A5 /* RateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateData.swift; sourceTree = "<group>"; };
 		8F94AC0C24BDE878005F38A5 /* RateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +79,7 @@
 		8F022EB724A8D315007FC1F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8F02FEE124C46EE300964831 /* OldMain.storyboard */,
 				8F022EA924A8D2F8007FC1F9 /* Main.storyboard */,
 			);
 			path = View;
@@ -159,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F022EB024A8D2FF007FC1F9 /* LaunchScreen.storyboard in Resources */,
+				8F02FEE324C46EE300964831 /* OldMain.storyboard in Resources */,
 				8F022EAD24A8D2FF007FC1F9 /* Assets.xcassets in Resources */,
 				8F022EAB24A8D2F8007FC1F9 /* Main.storyboard in Resources */,
 			);
@@ -197,6 +201,14 @@
 				8F022EAF24A8D2FF007FC1F9 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8F02FEE124C46EE300964831 /* OldMain.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F02FEE224C46EE300964831 /* Base */,
+			);
+			name = OldMain.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -321,14 +333,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = KQC4N36836;
 				INFOPLIST_FILE = ByteCoin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dmitkach.ByteCoin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -341,14 +353,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = KQC4N36836;
 				INFOPLIST_FILE = ByteCoin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dmitkach.ByteCoin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
